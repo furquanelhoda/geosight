@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoSight AI - وضع الكاميرا المباشرة</title>
+    
+    <!-- ربط ملف التنسيقات CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- ربط الخطوط والأيقونات -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- شاشة الكاميرا الرئيسية -->
+        <div id="camera-view">
+            <!-- فيديو الكاميرا الحية (سيتم تفعيله بالـ JS ) -->
+            <video id="live-camera" playsinline autoplay></video>
+            <!-- لوحة رسم لتحليل الصور المرفوعة -->
+            <canvas id="image-canvas"></canvas>
+            <div id="ar-overlay"></div>
+        </div>
+
+        <!-- واجهة التحكم والمعلومات -->
+        <div id="ui-hud">
+            <header>
+                <div id="settings-icon" class="icon-button"><i class="fas fa-cog"></i></div>
+                <h1>GeoSight AI</h1>
+                <div class="status">
+                    <span id="connection-status">● متصل بـ FSU</span>
+                </div>
+            </header>
+
+            <main id="scan-results">
+                <div class="result-box" id="detection-analysis-box">
+                    <h3>تحليل الكشف</h3>
+                    <details class="category-details" open><summary>المعادن الثمينة</summary><ul id="precious-metals-list"></ul></details>
+                    <details class="category-details"><summary>الأحجار الكريمة</summary><ul id="gemstones-list"></ul></details>
+                    <details class="category-details"><summary>مؤشرات النيازك</summary><ul id="meteorites-list"></ul></details>
+                </div>
+                <div class="result-box" id="structure-box">
+                    <h3>الهياكل المكتشفة</h3>
+                    <p id="structure-info">في انتظار المسح...</p>
+                </div>
+            </main>
+
+            <footer>
+                <!-- زر تبديل الوضع -->
+                <button id="toggle-mode-button" class="mode-button" title="التبديل إلى وضع رفع الصور">
+                    <i class="fas fa-upload"></i>
+                </button>
+                
+                <button id="scan-button">بدء المسح</button>
+                <button id="report-button" class="hidden">عرض التقرير الكامل</button>
+                
+                <!-- حقل رفع الملفات (مخفي) -->
+                <input type="file" id="image-upload-input" accept="image/*" class="hidden">
+
+                <div id="scan-progress-bar" class="hidden"><div id="progress"></div></div>
+                <p id="scan-message">وجّه الكاميرا واضغط لبدء المسح</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- شاشة الإعدادات المنبثقة -->
+    <div id="settings-modal" class="modal-container hidden">
+        <div class="modal-content">
+            <span id="close-settings" class="close-button">&times;</span>
+            <h2>الإعدادات</h2>
+            <div class="setting-item">
+                <label for="sensitivity-slider">حساسية المسح</label>
+                <input type="range" id="sensitivity-slider" min="1" max="100" value="75">
+                <span id="sensitivity-value">75%</span>
+            </div>
+            <div class="setting-item">
+                <label>الأهداف ذات الأولوية:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="check-metals" checked> <label for="check-metals">معادن ثمينة</label>
+                    <input type="checkbox" id="check-gems" checked> <label for="check-gems">أحجار كريمة</label>
+                    <input type="checkbox" id="check-cavities"> <label for="check-cavities">فراغات</label>
+                </div>
+            </div>
+            <div class="setting-item">
+                <label for="opacity-slider">شفافية الواجهة</label>
+                <input type="range" id="opacity-slider" min="20" max="100" value="80">
+                <span id="opacity-value">80%</span>
+            </div>
+            <button id="save-settings-button">حفظ الإعدادات</button>
+        </div>
+    </div>
+
+    <!-- عناصر الصوت -->
+    <audio id="scan-audio" src="https://assets.codepen.io/39255/scanner-loop.wav" loop></audio>
+    <audio id="alert-audio" src="https://assets.codepen.io/39255/success-alert.wav"></audio>
+
+    <!-- ربط ملف JavaScript في نهاية الصفحة لأداء أفضل -->
+    <script src="script.js"></script>
+</body>
+</html>

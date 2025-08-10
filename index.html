@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoSight AI - وضع الكاميرا المباشرة</title>
-    
-    <!-- ربط ملف التنسيقات CSS -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- ربط الخطوط والأيقونات -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
@@ -18,9 +14,7 @@
     <div id="app-container">
         <!-- شاشة الكاميرا الرئيسية -->
         <div id="camera-view">
-            <!-- فيديو الكاميرا الحية (سيتم تفعيله بالـ JS ) -->
             <video id="live-camera" playsinline autoplay></video>
-            <!-- لوحة رسم لتحليل الصور المرفوعة -->
             <canvas id="image-canvas"></canvas>
             <div id="ar-overlay"></div>
         </div>
@@ -28,7 +22,10 @@
         <!-- واجهة التحكم والمعلومات -->
         <div id="ui-hud">
             <header>
-                <div id="settings-icon" class="icon-button"><i class="fas fa-cog"></i></div>
+                <div class="header-icons">
+                    <div id="settings-icon" class="icon-button" aria-label="الإعدادات" tabindex="0"><i class="fas fa-cog"></i></div>
+                    <div id="camera-icon" class="icon-button" aria-label="الكاميرا" tabindex="0"><i class="fas fa-camera"></i></div>
+                </div>
                 <h1>GeoSight AI</h1>
                 <div class="status">
                     <span id="connection-status">● متصل بـ FSU</span>

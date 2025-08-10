@@ -237,3 +237,37 @@ document.addEventListener('DOMContentLoaded', () => {
         reportButton.classList.add('hidden');
     }
 });
+
+// Camera activation
+window.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('live-camera');
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(err => {
+                alert('تعذر الوصول إلى الكاميرا: ' + err.message);
+            });
+    } else {
+        alert('الكاميرا غير مدعومة في هذا المتصفح.');
+    }
+});
+
+// Example: Button event listeners
+document.getElementById('scan-button').onclick = function() {
+    // Add your scan logic here
+    alert('بدء المسح');
+};
+document.getElementById('toggle-mode-button').onclick = function() {
+    // Toggle upload mode logic
+    alert('تبديل الوضع');
+};
+document.getElementById('settings-icon').onclick = function() {
+    document.getElementById('settings-modal').classList.remove('hidden');
+};
+document.getElementById('close-settings').onclick = function() {
+    document.getElementById('settings-modal').classList.add('hidden');
+};
+<div id="settings-icon" class="icon-button"><i class="fas fa-cog"></i></div>
